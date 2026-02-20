@@ -74,109 +74,155 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-white" style={{ fontFamily: "'Oswald', sans-serif" }}>
+
+      {/* Top accent bar */}
+      <div className="h-1 bg-black w-full" />
+
       {/* Header */}
-      <header className="bg-white shadow-md">
-        <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center mr-3">
-                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
-                  <path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900">PharmaGuard</h1>
-                <p className="text-sm text-gray-600">Personalized Drug Safety Analysis</p>
-              </div>
-            </div>
-            <div className="text-right">
-              <p className="text-sm text-gray-600">Powered by Pharmacogenomics</p>
-              <p className="text-xs text-gray-500">CPIC Guidelines</p>
+      <header className="bg-white border-b border-black">
+        <div className="max-w-7xl mx-auto px-8 py-6 flex items-end justify-between">
+          <div>
+            <p className="text-xs tracking-widest uppercase text-black opacity-40 mb-1 font-light">
+              Precision Medicine Platform
+            </p>
+            <h1 className="text-5xl font-bold tracking-widest uppercase text-black leading-none">
+              PharmaGuard
+            </h1>
+          </div>
+          <div className="flex items-end gap-10 pb-0.5">
+            {['CYP2D6','CYP2C19','CYP2C9','SLCO1B1','TPMT','DPYD'].map(g => (
+              <span key={g} className="text-xs tracking-widest uppercase text-black opacity-30 font-light hidden lg:block">{g}</span>
+            ))}
+            <div className="text-right border-l border-black pl-8 ml-2">
+              <p className="text-xs tracking-widest uppercase font-semibold text-black">CPIC&nbsp;Guidelines</p>
+              <p className="text-xs tracking-wider text-black font-light mt-0.5 opacity-60">VCF · Pharmacogenomics</p>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+      {/* Main */}
+      <main className="max-w-7xl mx-auto px-8 py-14">
         {!result ? (
-          <div className="bg-white rounded-lg shadow-lg p-8">
-            <div className="max-w-3xl mx-auto">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
-                Upload VCF File for Analysis
-              </h2>
+          <div>
+            {/* Page Title */}
+            <div className="mb-14 flex items-end justify-between border-b border-black pb-6">
+              <div>
+                <p className="text-xs tracking-widest uppercase text-black opacity-40 font-light mb-2">Step-by-step</p>
+                <h2 className="text-6xl font-bold uppercase tracking-tight text-black leading-none">
+                  Genomic&nbsp;Analysis
+                </h2>
+              </div>
+              <p className="text-sm tracking-widest uppercase text-black font-light opacity-50 pb-1 hidden md:block">
+                Upload · Select · Analyze
+              </p>
+            </div>
 
-              <div className="space-y-8">
-                {/* File Upload Section */}
-                <div>
-                  <FileUpload
-                    onFileSelect={setSelectedFile}
-                    selectedFile={selectedFile}
-                  />
+            {/* Two-column input grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 border border-black mb-10">
+              {/* Left — File */}
+              <div className="p-8 border-b border-black lg:border-b-0 lg:border-r lg:border-black">
+                <div className="flex items-center gap-4 mb-6">
+                  <span className="text-5xl font-bold text-black opacity-10 leading-none select-none">01</span>
+                  <p className="text-sm tracking-widest uppercase font-semibold text-black">
+                    Genomic&nbsp;File
+                  </p>
                 </div>
+                <FileUpload onFileSelect={setSelectedFile} selectedFile={selectedFile} />
+              </div>
 
-                {/* Drug Selection Section */}
-                <div>
-                  <DrugInput
-                    onDrugsChange={setSelectedDrugs}
-                    selectedDrugs={selectedDrugs}
-                  />
+              {/* Right — Drugs */}
+              <div className="p-8">
+                <div className="flex items-center gap-4 mb-6">
+                  <span className="text-5xl font-bold text-black opacity-10 leading-none select-none">02</span>
+                  <p className="text-sm tracking-widest uppercase font-semibold text-black">
+                    Target&nbsp;Medications
+                  </p>
                 </div>
+                <DrugInput onDrugsChange={setSelectedDrugs} selectedDrugs={selectedDrugs} />
+              </div>
+            </div>
 
-                {/* Error Display */}
-                <ErrorBanner error={error} onClose={() => setError(null)} />
+            {/* Error */}
+            <ErrorBanner error={error} onClose={() => setError(null)} />
 
-                {/* Analyze Button */}
-                <div className="flex justify-center pt-4">
-                  <button
-                    onClick={handleAnalyze}
-                    disabled={!selectedFile || selectedDrugs.length === 0 || loading}
-                    className={`px-8 py-3 rounded-lg font-semibold text-white transition-all ${!selectedFile || selectedDrugs.length === 0 || loading
-                        ? 'bg-gray-400 cursor-not-allowed'
-                        : 'bg-primary hover:bg-blue-600 hover:shadow-lg'
-                      }`}
-                  >
-                    {loading ? (
-                      <div className="flex items-center">
-                        <svg className="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                        </svg>
-                        Analyzing...
-                      </div>
-                    ) : (
-                      'Analyze Pharmacogenomics'
-                    )}
-                  </button>
-                </div>
+            {/* Analyze Button */}
+            <div className="mb-14">
+              <button
+                onClick={handleAnalyze}
+                disabled={!selectedFile || selectedDrugs.length === 0 || loading}
+                className={`w-full py-5 text-sm tracking-widest uppercase font-semibold transition-all border-2 relative overflow-hidden group ${
+                  !selectedFile || selectedDrugs.length === 0 || loading
+                    ? 'bg-white text-black border-black opacity-25 cursor-not-allowed'
+                    : 'bg-black text-white border-black hover:bg-white hover:text-black'
+                }`}
+              >
+                {loading ? (
+                  <span className="flex items-center justify-center gap-4">
+                    <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
+                      <circle className="opacity-20" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" />
+                      <path className="opacity-80" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                    </svg>
+                    Running Analysis — Please Wait
+                  </span>
+                ) : (
+                  <span className="flex items-center justify-center gap-3">
+                    Run Pharmacogenomic Analysis
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </span>
+                )}
+              </button>
+              {(!selectedFile || selectedDrugs.length === 0) && (
+                <p className="text-center text-xs tracking-widest uppercase text-black opacity-30 mt-3 font-light">
+                  {!selectedFile && selectedDrugs.length === 0
+                    ? 'VCF file and medication required'
+                    : !selectedFile
+                    ? 'VCF file required'
+                    : 'At least one medication required'}
+                </p>
+              )}
+            </div>
 
-                {/* Info Section */}
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-6">
-                  <h3 className="font-semibold text-blue-900 mb-2">How it works:</h3>
-                  <ol className="text-sm text-blue-800 space-y-1 list-decimal list-inside">
-                    <li>Upload your VCF file (max 5MB)</li>
-                    <li>Select one or more drugs to analyze</li>
-                    <li>Our system analyzes 6 key pharmacogenomic genes</li>
-                    <li>Receive personalized drug safety recommendations</li>
-                  </ol>
-                </div>
+            {/* How it works */}
+            <div>
+              <p className="text-xs tracking-widest uppercase font-semibold text-black opacity-40 mb-8 border-t border-black pt-8">
+                How It Works
+              </p>
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-0 border-l border-black">
+                {[
+                  ['01', 'Upload', 'VCF genomic file up to 5 MB'],
+                  ['02', 'Select', 'Choose one or more target medications'],
+                  ['03', 'Analyze', '6 pharmacogenomic genes assessed via CPIC'],
+                  ['04', 'Review', 'Receive personalized risk and dosing guidance'],
+                ].map(([num, title, desc]) => (
+                  <div key={num} className="border-r border-b border-black p-6 relative">
+                    <p className="text-5xl font-bold text-black opacity-8 leading-none mb-4 select-none" style={{ opacity: 0.07 }}>{num}</p>
+                    <p className="text-base font-bold uppercase tracking-widest text-black mb-2">{title}</p>
+                    <p className="text-xs font-light text-black opacity-60 leading-relaxed tracking-wide">{desc}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         ) : (
-          <div className="space-y-6">
-            {/* Result Display — result is now List[AnalysisResponse] */}
+          <div className="space-y-10">
             <ResultDisplay results={result} />
-
-            {/* Back Button */}
-            <div className="flex justify-center">
+            <div className="flex items-center justify-between pt-6 border-t-2 border-black">
+              <div>
+                <p className="text-xs tracking-widest uppercase text-black opacity-40 font-light">Analysis complete</p>
+                <p className="text-sm tracking-wider text-black font-light mt-0.5">{result.length} medication{result.length > 1 ? 's' : ''} analyzed</p>
+              </div>
               <button
                 onClick={handleReset}
-                className="px-8 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors font-semibold"
+                className="flex items-center gap-3 px-10 py-4 bg-white text-black border-2 border-black text-xs tracking-widest uppercase font-semibold hover:bg-black hover:text-white transition-all"
               >
-                Analyze Another Sample
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                New Analysis
               </button>
             </div>
           </div>
@@ -184,11 +230,16 @@ function App() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-gray-200 mt-12">
-        <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-          <p className="text-center text-sm text-gray-600">
-            © 2026 PharmaGuard | For research and educational purposes only |
-            Always consult healthcare professionals for medical decisions
+      <footer className="border-t border-black mt-24">
+        <div className="max-w-7xl mx-auto px-8 py-7 flex items-center justify-between">
+          <div className="flex items-center gap-6">
+            <p className="text-xs tracking-widest uppercase text-black font-semibold">
+              PharmaGuard
+            </p>
+            <p className="text-xs text-black opacity-30 font-light">&copy; 2026</p>
+          </div>
+          <p className="text-xs tracking-wider text-black font-light opacity-50">
+            Research and educational use only. Always consult a licensed healthcare professional.
           </p>
         </div>
       </footer>
