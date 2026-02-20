@@ -1,15 +1,15 @@
-# 🧬 PharmaGuard - Pharmacogenomics Analysis Platform
+# PharmaGuard - Pharmacogenomics Analysis Platform
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![React](https://img.shields.io/badge/React-18.0+-61DAFB.svg)](https://reactjs.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-009688.svg)](https://fastapi.tiangolo.com/)
 
-## 🎯 Overview
+## Overview
 
 **PharmaGuard** is a production-grade pharmacogenomics web application that analyzes VCF files to provide personalized drug safety recommendations based on genetic variants. It identifies pharmacogenomic variants in key genes (CYP2D6, CYP2C19, CYP2C9, SLCO1B1, TPMT, DPYD), determines phenotypes using CPIC guidelines, and delivers drug-specific risk assessments with LLM-generated explanations.
 
-## 🔗 Live Demo
+## Live Demo
 
 **Live Application:** [Add your deployed URL here]
 
@@ -17,7 +17,7 @@
 
 ---
 
-## 🏗️ System Architecture
+## System Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -104,7 +104,7 @@ External API Integrations:
 
 ---
 
-## 🧬 Supported Genes & Drugs
+## Supported Genes & Drugs
 
 ### Genes Analyzed
 - **CYP2D6** - Activity score model
@@ -132,7 +132,7 @@ External API Integrations:
 
 ---
 
-## 🚀 Installation & Setup
+## Installation & Setup
 
 ### Prerequisites
 - Python 3.8+
@@ -194,7 +194,7 @@ Frontend will start at `http://localhost:3000`
 
 ---
 
-## 🔌 API Integration
+## API Integration
 
 PharmaGuard leverages **three free APIs** for dynamic, real-time analysis:
 
@@ -202,13 +202,13 @@ PharmaGuard leverages **three free APIs** for dynamic, real-time analysis:
 2. **Groq LLM** - Fast, free LLM inference with llama-3.1-70b (free tier)
 3. **DuckDuckGo Search** - Web search for contextual research (no key required)
 
-**Total Cost**: $0/month 🎉
+**Total Cost**: $0/month
 
 See [API_INTEGRATION.md](API_INTEGRATION.md) for detailed architecture.
 
 ---
 
-## 📋 API Documentation
+## API Documentation
 
 ### Endpoint: `POST /api/analyze`
 
@@ -280,7 +280,7 @@ drug: <drug name> (lowercase string)
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 PharmaGuard/
@@ -324,7 +324,7 @@ PharmaGuard/
 
 ---
 
-## 🧪 Sample VCF File
+## Sample VCF File
 
 A sample VCF file is provided in `backend/sample_vcf/sample_patient.vcf` for testing. It contains variants in all 6 supported genes.
 
@@ -336,7 +336,7 @@ A sample VCF file is provided in `backend/sample_vcf/sample_patient.vcf` for tes
 
 ---
 
-## 🔒 Clinical Decision Logic
+## Clinical Decision Logic
 
 ### Step-by-Step Processing
 
@@ -372,14 +372,14 @@ A sample VCF file is provided in `backend/sample_vcf/sample_patient.vcf` for tes
 
 ---
 
-## 🎨 Frontend Features
+## Frontend Features
 
 - **Drag & Drop Upload** with file size validation
 - **Smart Drug Search** with autocomplete
 - **Color-Coded Risk Display**
-  - 🟢 Green: Safe
-  - 🟡 Yellow: Adjust Dosage
-  - 🔴 Red: Toxic/Ineffective
+  - Green: Safe
+  - Yellow: Adjust Dosage
+  - Red: Toxic/Ineffective
 - **Expandable Gene Profiles** with variant details
 - **Copy/Download JSON** functionality
 - **Quality Metrics Dashboard**
@@ -387,7 +387,7 @@ A sample VCF file is provided in `backend/sample_vcf/sample_patient.vcf` for tes
 
 ---
 
-## ⚠️ Edge Cases Handled
+## Edge Cases Handled
 
 1. **No gene variants** → Assume *1/*1 (reference)
 2. **Unknown star allele** → Phenotype = Unknown
@@ -400,7 +400,7 @@ A sample VCF file is provided in `backend/sample_vcf/sample_patient.vcf` for tes
 
 ---
 
-## 📊 Quality Metrics
+## Quality Metrics
 
 Every analysis includes quality metrics:
 - `vcf_parsing_success` - File parsed successfully
@@ -412,7 +412,7 @@ Every analysis includes quality metrics:
 
 ---
 
-## 🔧 Configuration
+## Configuration
 
 ### Backend Environment Variables
 ```env
@@ -435,7 +435,7 @@ See [API_INTEGRATION.md](API_INTEGRATION.md) for caching and optimization strate
 
 ---
 
-## 🚢 Deployment
+## Deployment
 
 ### Backend (Recommended: Railway, Render, AWS)
 1. Ensure CORS_ORIGINS includes production URL
@@ -452,7 +452,7 @@ See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment guide.
 
 ---
 
-## 👥 Team
+## Team
 
 **[Add your team member names and roles here]**
 
@@ -462,13 +462,13 @@ See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment guide.
 
 ---
 
-## 📄 License
+## License
 
 This project is for educational and hackathon purposes. Always consult healthcare professionals for medical decisions.
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **CPIC** - Clinical Pharmacogenetics Implementation Consortium
 - **PharmVar** - Pharmacogene Variation Consortium (API integration)
@@ -477,16 +477,16 @@ This project is for educational and hackathon purposes. Always consult healthcar
 
 ---
 
-## 🔮 Future Enhancements
+## Future Enhancements
 
-**Completed ✅:**
-- ✅ Dynamic PharmVar API integration
-- ✅ Real-time web search augmentation
-- ✅ Free-tier LLM (Groq)
-- ✅ Hybrid data strategy with fallback
-- ✅ TTL caching for performance
+**Completed:**
+- Dynamic PharmVar API integration
+- Real-time web search augmentation
+- Free-tier LLM (Groq)
+- Hybrid data strategy with fallback
+- TTL caching for performance
 
-**Roadmap 🚀:**
+**Roadmap:**
 
 1. **PharmGKB API Integration**
    - Direct CPIC guideline fetching
@@ -522,7 +522,7 @@ If CPIC updates guidelines:
 
 ---
 
-## 📞 Support
+## Support
 
 For questions or issues:
 - Open an issue in the repository
@@ -530,4 +530,4 @@ For questions or issues:
 
 ---
 
-**Built with ❤️ for RIFT Hackathon 2026**
+**Built with love for RIFT Hackathon 2026**
