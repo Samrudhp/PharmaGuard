@@ -1,0 +1,248 @@
+{
+  "CYP2D6": {
+    "codeine": {
+      "PM": {
+        "risk_label": "Ineffective",
+        "severity": "moderate",
+        "recommendation": "Avoid codeine. Consider alternative analgesics such as morphine or non-opioid options."
+      },
+      "IM": {
+        "risk_label": "Adjust Dosage",
+        "severity": "low",
+        "recommendation": "Use alternative analgesic or reduce dose by 50%. Monitor for reduced efficacy."
+      },
+      "NM": {
+        "risk_label": "Safe",
+        "severity": "none",
+        "recommendation": "Use standard codeine dosing per clinical guidelines."
+      },
+      "URM": {
+        "risk_label": "Toxic",
+        "severity": "high",
+        "recommendation": "Avoid codeine due to increased risk of toxicity. Consider alternative analgesics."
+      }
+    },
+    "tramadol": {
+      "PM": {
+        "risk_label": "Ineffective",
+        "severity": "moderate",
+        "recommendation": "Avoid tramadol. Use alternative pain management."
+      },
+      "IM": {
+        "risk_label": "Adjust Dosage",
+        "severity": "low",
+        "recommendation": "Consider alternative or monitor closely for reduced efficacy."
+      },
+      "NM": {
+        "risk_label": "Safe",
+        "severity": "none",
+        "recommendation": "Use standard tramadol dosing."
+      },
+      "URM": {
+        "risk_label": "Toxic",
+        "severity": "high",
+        "recommendation": "Avoid tramadol. Risk of respiratory depression."
+      }
+    }
+  },
+  "CYP2C19": {
+    "clopidogrel": {
+      "PM": {
+        "risk_label": "Ineffective",
+        "severity": "critical",
+        "recommendation": "Avoid clopidogrel. Use alternative antiplatelet such as prasugrel or ticagrelor."
+      },
+      "IM": {
+        "risk_label": "Adjust Dosage",
+        "severity": "high",
+        "recommendation": "Consider alternative antiplatelet therapy. If clopidogrel used, increase dose or monitor closely."
+      },
+      "NM": {
+        "risk_label": "Safe",
+        "severity": "none",
+        "recommendation": "Use standard clopidogrel dosing (75mg daily)."
+      },
+      "RM": {
+        "risk_label": "Safe",
+        "severity": "none",
+        "recommendation": "Use standard clopidogrel dosing."
+      },
+      "URM": {
+        "risk_label": "Safe",
+        "severity": "none",
+        "recommendation": "Use standard clopidogrel dosing."
+      }
+    },
+    "escitalopram": {
+      "PM": {
+        "risk_label": "Adjust Dosage",
+        "severity": "moderate",
+        "recommendation": "Reduce escitalopram dose by 50%. Monitor for adverse effects."
+      },
+      "IM": {
+        "risk_label": "Adjust Dosage",
+        "severity": "low",
+        "recommendation": "Consider 25% dose reduction. Monitor response."
+      },
+      "NM": {
+        "risk_label": "Safe",
+        "severity": "none",
+        "recommendation": "Use standard escitalopram dosing."
+      },
+      "RM": {
+        "risk_label": "Safe",
+        "severity": "none",
+        "recommendation": "Standard dosing, may require higher doses for efficacy."
+      },
+      "URM": {
+        "risk_label": "Adjust Dosage",
+        "severity": "low",
+        "recommendation": "May require higher doses. Monitor therapeutic response."
+      }
+    }
+  },
+  "CYP2C9": {
+    "warfarin": {
+      "PM": {
+        "risk_label": "Toxic",
+        "severity": "critical",
+        "recommendation": "Reduce warfarin dose by 50-75%. Frequent INR monitoring required."
+      },
+      "IM": {
+        "risk_label": "Adjust Dosage",
+        "severity": "high",
+        "recommendation": "Reduce warfarin dose by 25-50%. Monitor INR closely."
+      },
+      "NM": {
+        "risk_label": "Safe",
+        "severity": "none",
+        "recommendation": "Use standard warfarin dosing with routine INR monitoring."
+      }
+    },
+    "phenytoin": {
+      "PM": {
+        "risk_label": "Toxic",
+        "severity": "high",
+        "recommendation": "Reduce phenytoin dose by 25-50%. Monitor serum levels."
+      },
+      "IM": {
+        "risk_label": "Adjust Dosage",
+        "severity": "moderate",
+        "recommendation": "Reduce dose by 25%. Monitor therapeutic levels."
+      },
+      "NM": {
+        "risk_label": "Safe",
+        "severity": "none",
+        "recommendation": "Use standard phenytoin dosing."
+      }
+    }
+  },
+  "SLCO1B1": {
+    "simvastatin": {
+      "PM": {
+        "risk_label": "Toxic",
+        "severity": "high",
+        "recommendation": "Avoid simvastatin or use lowest dose (20mg max). Consider alternative statin."
+      },
+      "IM": {
+        "risk_label": "Adjust Dosage",
+        "severity": "moderate",
+        "recommendation": "Reduce simvastatin dose. Maximum 40mg daily. Monitor for myopathy."
+      },
+      "NM": {
+        "risk_label": "Safe",
+        "severity": "none",
+        "recommendation": "Use standard simvastatin dosing."
+      }
+    },
+    "atorvastatin": {
+      "PM": {
+        "risk_label": "Adjust Dosage",
+        "severity": "moderate",
+        "recommendation": "Use lower atorvastatin dose. Monitor for muscle symptoms."
+      },
+      "IM": {
+        "risk_label": "Adjust Dosage",
+        "severity": "low",
+        "recommendation": "Use standard or reduced dose. Monitor for adverse effects."
+      },
+      "NM": {
+        "risk_label": "Safe",
+        "severity": "none",
+        "recommendation": "Use standard atorvastatin dosing."
+      }
+    }
+  },
+  "TPMT": {
+    "azathioprine": {
+      "PM": {
+        "risk_label": "Toxic",
+        "severity": "critical",
+        "recommendation": "Avoid azathioprine or reduce dose by 90%. Severe myelosuppression risk."
+      },
+      "IM": {
+        "risk_label": "Adjust Dosage",
+        "severity": "high",
+        "recommendation": "Reduce azathioprine dose by 50%. Monitor CBC weekly for 4 weeks."
+      },
+      "NM": {
+        "risk_label": "Safe",
+        "severity": "none",
+        "recommendation": "Use standard azathioprine dosing with routine monitoring."
+      }
+    },
+    "mercaptopurine": {
+      "PM": {
+        "risk_label": "Toxic",
+        "severity": "critical",
+        "recommendation": "Reduce mercaptopurine dose by 90% or consider alternative."
+      },
+      "IM": {
+        "risk_label": "Adjust Dosage",
+        "severity": "high",
+        "recommendation": "Reduce dose by 50%. Monitor blood counts closely."
+      },
+      "NM": {
+        "risk_label": "Safe",
+        "severity": "none",
+        "recommendation": "Use standard mercaptopurine dosing."
+      }
+    }
+  },
+  "DPYD": {
+    "fluorouracil": {
+      "PM": {
+        "risk_label": "Toxic",
+        "severity": "critical",
+        "recommendation": "Avoid fluorouracil. Select alternative chemotherapy."
+      },
+      "IM": {
+        "risk_label": "Adjust Dosage",
+        "severity": "high",
+        "recommendation": "Reduce fluorouracil dose by 50%. Monitor closely for toxicity."
+      },
+      "NM": {
+        "risk_label": "Safe",
+        "severity": "none",
+        "recommendation": "Use standard fluorouracil dosing."
+      }
+    },
+    "capecitabine": {
+      "PM": {
+        "risk_label": "Toxic",
+        "severity": "critical",
+        "recommendation": "Avoid capecitabine. Consider alternative therapy."
+      },
+      "IM": {
+        "risk_label": "Adjust Dosage",
+        "severity": "high",
+        "recommendation": "Reduce capecitabine dose by 50%. Monitor for toxicity."
+      },
+      "NM": {
+        "risk_label": "Safe",
+        "severity": "none",
+        "recommendation": "Use standard capecitabine dosing."
+      }
+    }
+  }
+}
