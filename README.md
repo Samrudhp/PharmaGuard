@@ -19,66 +19,46 @@
 
 ## System Architecture
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                      FRONTEND (React)                       │
-│  ┌──────────────┐  ┌─────────────┐  ┌─────────────────┐   │
-│  │ FileUpload   │  │ DrugInput   │  │ ResultDisplay   │   │
-│  └──────────────┘  └─────────────┘  └─────────────────┘   │
-└────────────────────────┬────────────────────────────────────┘
-                         │ HTTP POST /api/analyze
-                         │ (VCF + Drug)
-┌────────────────────────▼────────────────────────────────────┐
-│                    FASTAPI BACKEND                          │
-│  ┌────────────────────────────────────────────────────┐    │
-│  │  API Layer (routes/analyze.py)                     │    │
-│  │  • Input validation                                │    │
-│  │  • Response schema enforcement                     │    │
-│  └────────────────┬───────────────────────────────────┘    │
-│                   │                                         │
-│  ┌────────────────▼───────────────────────────────────┐    │
-│  │  Service Layer (Clinical Logic + API Integration) │    │
-│  │  ┌──────────────────────────────────────────────┐ │    │
-│  │  │ VCF Parser → Star Engine → Diplotype Engine │ │    │
-│  │  │      ↓             ↓              ↓          │ │    │
-│  │  │ Phenotype Engine → Drug Engine               │ │    │
-│  │  └──────────────────────────────────────────────┘ │    │
-│  └─────────────────────────┬──────────────────────────┘    │
-│                            │                                │
-│  ┌─────────────────────────▼──────────────────────────┐    │
-│  │  PharmVar Service (Real-time Data)                 │    │
-│  │  • Star allele definitions from PharmVar API       │    │
-│  │  • Activity scores dynamically fetched             │    │
-│  │  • Fallback to static JSON if API unavailable      │    │
-│  └────────────────────────────────────────────────────┘    │
-│                            │                                │
-│  ┌─────────────────────────▼──────────────────────────┐    │
-│  │  Web Search Service (Contextual Research)          │    │
-│  │  • Real-time pharmacogenomics research             │    │
-│  │  • CPIC guideline validation                       │    │
-│  │  • Evidence-based context for LLM                  │    │
-│  └────────────────────────────────────────────────────┘    │
-│                            │                                │
-│  ┌─────────────────────────▼──────────────────────────┐    │
-│  │  Groq LLM Service (Free Tier)                      │    │
-│  │  • llama-3.1-70b-versatile model                   │    │
-│  │  • Web-augmented explanations                      │    │
-│  │  • Fallback to templates if API fails              │    │
-│  └────────────────────────────────────────────────────┘    │
-│                                                             │
-│  ┌──────────────────────────────────────────────────┐      │
-│  │  Data Layer (Hybrid Static + Dynamic)           │      │
-│  │  • PharmVar API (primary source)                │      │
-│  │  • Static JSON (fallback)                       │      │
-│  │  • TTL caching (1 hour, 1000 entries)           │      │
-│  └──────────────────────────────────────────────────┘      │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    subgraph FE["Frontend — React"]
+        direction LR
+        FU["FileUpload"]
+        DI["DrugInput"]
+        RD["ResultDisplay"]
+    end
 
-External API Integrations:
-┌──────────────────┐  ┌──────────────────┐  ┌──────────────────┐
-│  PharmVar API    │  │  Groq LLM API    │  │  DuckDuckGo      │
-│  (Free, 2 req/s) │  │  (Free 30/min)   │  │  (Web Search)    │
-└──────────────────┘  └──────────────────┘  └──────────────────┘
+    subgraph BE["FastAPI Backend"]
+        API["API Layer\nroutes/analyze.py\nValidation · Schema enforcement"]
+
+        subgraph PIPE["Clinical Processing Pipeline"]
+            direction LR
+            VP["VCF Parser"] --> SE["Star Engine"] --> DE["Diplotype Engine"] --> PE["Phenotype Engine"] --> DRE["Drug Engine"]
+        end
+
+        subgraph EXT["External Services"]
+            direction LR
+            PV["PharmVar API\nStar allele definitions\nActivity scores"]
+            WS["DuckDuckGo\nReal-time web search\nCPIC context"]
+            LLM["Groq LLM\nllama-3.1-70b\nExplanation generation"]
+        end
+
+        subgraph DATA["Data Layer"]
+            direction LR
+            CACHE["TTL Cache\n1 hour · 1000 entries"]
+            JSON["Static JSON\nFallback data"]
+        end
+    end
+
+    FU & DI -->|"POST /api/analyze\nVCF file + drug name"| API
+    API --> PIPE
+    SE <-->|"Star allele lookup"| CACHE
+    CACHE <-->|"Live fetch"| PV
+    PV -.->|"API unavailable"| JSON
+    DRE -->|"Clinical result"| WS
+    WS -->|"Evidence context"| LLM
+    LLM -->|"Structured explanation"| API
+    API -->|"JSON response"| RD
 ```
 
 ### Key Design Principles
